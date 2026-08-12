@@ -1,4 +1,4 @@
-# 👋 Olá! Eu sou Jean de Oliveira de Lara
+# 👋 Olá! Bem-vindo no meu GitHub
 
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0F172A,50:2563EB,100:06B6D4&height=220&section=header&text=JEAN%20DE%20OLIVEIRA%20DE%20LARA&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=35"/>
