@@ -1,7 +1,7 @@
-# 👋 Olá! Bem-vindo no meu GitHub
+# 👋 Olá! Bem-vindo em meu GitHub.
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0F172A,50:2563EB,100:06B6D4&height=220&section=header&text=JEAN%20DE%20OLIVEIRA%20DE%20LARA&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=35"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0F172A,50:2563EB,100:06B6D4&height=220&section=header&text=JEAN%20OLIVEIRA%20LARA&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=35"/>
 </p>
 
 <p align="center">
@@ -38,11 +38,6 @@ Estou construindo minha experiência através de projetos práticos, explorando 
   <img src="https://skillicons.dev/icons?i=js,html" />
 </p>
 
-|   Tecnologia  | Utilização                  |
-| :-----------: | :-------------------------- |
-| 🟨 JavaScript | Desenvolvimento de projetos |
-|    🟧 HTML5   | Desenvolvimento web         |
-
 ---
 
 ## 📊 Linguagens utilizadas
@@ -62,35 +57,11 @@ Estou construindo minha experiência através de projetos práticos, explorando 
 
 ## 🚀 Projetos
 
-### 🎮 LEVELUP
+<!-- PROJECTS:START -->
 
-Projeto desenvolvido em **JavaScript**, criado como parte da minha evolução prática em programação.
+Os meus projetos serão atualizados automaticamente aqui. 🚀
 
-<p>
-  <a href="https://github.com/Jean-Oliveira-Lara/LEVELUP">
-    <img src="https://img.shields.io/badge/Ver%20projeto-2563EB?style=for-the-badge&logo=github&logoColor=white"/>
-  </a>
-</p>
-
-**Tecnologia principal:**
-
-`JavaScript`
-
----
-
-### 🌭 Projeto Hot Dog
-
-Projeto web desenvolvido utilizando **HTML**, com foco na criação de uma página para um estabelecimento de alimentação.
-
-<p>
-  <a href="https://github.com/Jean-Oliveira-Lara/projeto-hot-dog">
-    <img src="https://img.shields.io/badge/Ver%20projeto-06B6D4?style=for-the-badge&logo=github&logoColor=white"/>
-  </a>
-</p>
-
-**Tecnologia principal:**
-
-`HTML5`
+<!-- PROJECTS:END -->
 
 ---
 
@@ -101,13 +72,12 @@ Projeto web desenvolvido utilizando **HTML**, com foco na criação de uma pági
     src="https://github-readme-stats-fast.vercel.app/api?username=Jean-Oliveira-Lara&show_icons=true&theme=tokyonight&hide_border=true&include_all_commits=true"
     height="180"
   />
-</p>
 
-<p align="center">
-  <img
-    src="https://github-readme-stats-fast.vercel.app/api/streak?username=Jean-Oliveira-Lara&theme=tokyonight&hide_border=true"
-    height="180"
-  />
+<img
+ src="https://github-readme-stats-fast.vercel.app/api/streak?username=Jean-Oliveira-Lara&theme=tokyonight&hide_border=true"
+ height="180"
+/>
+
 </p>
 
 ---
@@ -138,16 +108,18 @@ Cada projeto é uma oportunidade de aprender algo novo e melhorar minhas habilid
 
 <p align="center">
 
-<a href="mailto:jeanoliveiradelara@gmail.com">
-  <img src="https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white"/>
-</a>
-
-<a href="https://www.linkedin.com/in/jean-oliveira-de-lara-361b0020b/">
-  <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/>
-</a>
-
 <a href="https://github.com/Jean-Oliveira-Lara">
   <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/>
 </a>
 
+</p>
+
+---
+
+<p align="center">
+  <strong>⭐ Obrigado por visitar meu perfil!</strong>
+</p>
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:06B6D4,50:2563EB,100:0F172A&height=120&section=footer"/>
 </p>
