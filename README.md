@@ -5,10 +5,6 @@
 </p>
 
 <p align="center">
-  <img src="https://github.com/Jean-Oliveira-Lara.png" width="150" height="150" style="border-radius:50%;" />
-</p>
-
-<p align="center">
   <strong>💻 Desenvolvedor em evolução • 🚀 Construindo projetos • 📚 Sempre aprendendo</strong>
 </p>
 
@@ -105,12 +101,13 @@ Projeto web desenvolvido utilizando **HTML**, com foco na criação de uma pági
     src="https://github-readme-stats-fast.vercel.app/api?username=Jean-Oliveira-Lara&show_icons=true&theme=tokyonight&hide_border=true&include_all_commits=true"
     height="180"
   />
+</p>
 
-<img
- src="https://github-readme-stats-fast.vercel.app/api/streak/?user=Jean-Oliveira-Lara&theme=tokyonight&hide_border=true"
- height="180"
-/>
-
+<p align="center">
+  <img
+    src="https://github-readme-stats-fast.vercel.app/api/streak?username=Jean-Oliveira-Lara&theme=tokyonight&hide_border=true"
+    height="180"
+  />
 </p>
 
 ---
