@@ -5,6 +5,10 @@
 </p>
 
 <p align="center">
+  <img src="https://github.com/Jean-Oliveira-Lara.png" width="150" height="150" style="border-radius:50%;" />
+</p>
+
+<p align="center">
   <strong>💻 Desenvolvedor em evolução • 🚀 Construindo projetos • 📚 Sempre aprendendo</strong>
 </p>
 
@@ -22,11 +26,11 @@ Olá! Sou **Jean Oliveira Lara**, apaixonado por tecnologia e desenvolvimento de
 
 Estou construindo minha experiência através de projetos práticos, explorando o desenvolvimento web e buscando evoluir constantemente minhas habilidades.
 
-- 💻 Desenvolvimento de software
-- 🌐 Desenvolvimento web
-- 🚀 Projetos pessoais
-- 📚 Aprendizado contínuo
-- 🎯 Foco em evolução e novos desafios
+* 💻 Desenvolvimento de software
+* 🌐 Desenvolvimento web
+* 🚀 Projetos pessoais
+* 📚 Aprendizado contínuo
+* 🎯 Foco em evolução e novos desafios
 
 ---
 
@@ -38,10 +42,10 @@ Estou construindo minha experiência através de projetos práticos, explorando 
   <img src="https://skillicons.dev/icons?i=js,html" />
 </p>
 
-| Tecnologia | Uso |
-|:---:|:---|
+|   Tecnologia  | Utilização                  |
+| :-----------: | :-------------------------- |
 | 🟨 JavaScript | Desenvolvimento de projetos |
-| 🟧 HTML5 | Desenvolvimento web |
+|    🟧 HTML5   | Desenvolvimento web         |
 
 ---
 
@@ -49,13 +53,13 @@ Estou construindo minha experiência através de projetos práticos, explorando 
 
 <p align="center">
   <img
-    src="https://github-readme-stats.vercel.app/api/top-langs/?username=Jean-Oliveira-Lara&layout=donut&theme=tokyonight&hide_border=true"
-    height="200"
+    src="https://github-readme-stats-fast.vercel.app/api/top-langs/?username=Jean-Oliveira-Lara&layout=donut&theme=tokyonight&hide_border=true&langs_count=5"
+    height="220"
   />
 </p>
 
 <p align="center">
-  <em>Distribuição das linguagens utilizadas nos meus repositórios.</em>
+  <em>Distribuição das linguagens presentes nos meus repositórios públicos.</em>
 </p>
 
 ---
@@ -98,14 +102,15 @@ Projeto web desenvolvido utilizando **HTML**, com foco na criação de uma pági
 
 <p align="center">
   <img
-    src="https://github-readme-stats.vercel.app/api?username=Jean-Oliveira-Lara&show_icons=true&theme=tokyonight&hide_border=true&include_all_commits=true"
+    src="https://github-readme-stats-fast.vercel.app/api?username=Jean-Oliveira-Lara&show_icons=true&theme=tokyonight&hide_border=true&include_all_commits=true"
     height="180"
   />
 
-  <img
-    src="https://streak-stats.demolab.com?user=Jean-Oliveira-Lara&theme=tokyonight&hide_border=true"
-    height="180"
-  />
+<img
+ src="https://github-readme-stats-fast.vercel.app/api/streak/?user=Jean-Oliveira-Lara&theme=tokyonight&hide_border=true"
+ height="180"
+/>
+
 </p>
 
 ---
@@ -114,15 +119,40 @@ Projeto web desenvolvido utilizando **HTML**, com foco na criação de uma pági
 
 Estou focado em:
 
-- 🚀 Evoluir minhas habilidades de programação
-- 🌐 Aprimorar meus conhecimentos em desenvolvimento web
-- 💻 Criar projetos cada vez mais completos
-- 📚 Aprender novas tecnologias
-- 🔥 Construir um portfólio sólido
+* 🚀 Evoluir minhas habilidades de programação
+* 🌐 Aprimorar meus conhecimentos em desenvolvimento web
+* 💻 Criar projetos cada vez mais completos
+* 📚 Aprender novas tecnologias
+* 🔥 Construir um portfólio sólido
 
 ---
 
 ## 🧠 Minha jornada
 
-```text
-Aprender → Praticar → Criar → Errar → Melhorar → Evoluir 🚀
+<p align="center">
+  <strong>Aprender → Praticar → Criar → Errar → Melhorar → Evoluir 🚀</strong>
+</p>
+
+Cada projeto é uma oportunidade de aprender algo novo e melhorar minhas habilidades.
+
+---
+
+## 📫 Contato
+
+<p align="center">
+
+<a href="https://github.com/Jean-Oliveira-Lara">
+  <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/>
+</a>
+
+</p>
+
+---
+
+<p align="center">
+  <strong>⭐ Obrigado por visitar meu perfil!</strong>
+</p>
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:06B6D4,50:2563EB,100:0F172A&height=120&section=footer"/>
+</p>
