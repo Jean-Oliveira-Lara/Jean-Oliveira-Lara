@@ -1,1 +1,154 @@
+name: Atualizar projetos do perfil
+
+on:
+schedule:
+- cron: "0 9 * * *"
+
+workflow_dispatch:
+
+permissions:
+contents: write
+
+jobs:
+atualizar-readme:
+runs-on: ubuntu-latest
+
+```
+steps:
+  - name: Baixar repositório
+    uses: actions/checkout@v4
+
+  - name: Atualizar lista de projetos
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    run: |
+      python <<'PY'
+      import json
+      import os
+      import urllib.request
+
+      USERNAME = "Jean-Oliveira-Lara"
+      PROFILE_REPO = "Jean-Oliveira-Lara"
+      README = "README.md"
+
+      url = (
+          f"https://api.github.com/users/{USERNAME}/repos"
+          "?per_page=100&sort=updated&direction=desc"
+      )
+
+      request = urllib.request.Request(
+          url,
+          headers={
+              "Accept": "application/vnd.github+json",
+              "Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}",
+              "X-GitHub-Api-Version": "2026-03-10",
+          },
+      )
+
+      with urllib.request.urlopen(request) as response:
+          repos = json.load(response)
+
+      projetos = []
+
+      for repo in repos:
+          nome = repo["name"]
+
+          # Não mostrar o próprio repositório do perfil
+          if nome.lower() == PROFILE_REPO.lower():
+              continue
+
+          # Ignorar forks
+          if repo.get("fork"):
+              continue
+
+          # Ignorar repositórios arquivados
+          if repo.get("archived"):
+              continue
+
+          descricao = repo.get("description") or "Projeto em desenvolvimento."
+
+          linguagem = repo.get("language") or "Código"
+
+          estrelas = repo.get("stargazers_count", 0)
+
+          url_projeto = repo["html_url"]
+
+          projetos.append({
+              "nome": nome,
+              "descricao": descricao,
+              "linguagem": linguagem,
+              "estrelas": estrelas,
+              "url": url_projeto
+          })
+
+          # Mostrar no máximo 6 projetos
+          if len(projetos) >= 6:
+              break
+
+      linhas = []
+
+      if not projetos:
+          linhas.append("Ainda não há projetos públicos para mostrar. 🚀")
+      else:
+          for projeto in projetos:
+              linhas.append(
+                  f"""### 🚀 {projeto['nome']}
+```
+
+{projeto['descricao']}
+
+`{projeto['linguagem']}` ⭐ {projeto['estrelas']}
+
+[🔗 Ver projeto]({projeto['url']})
+
+---"""
+)
+
+```
+      novo_conteudo = "\n\n".join(linhas)
+
+      with open(README, "r", encoding="utf-8") as arquivo:
+          readme = arquivo.read()
+
+      inicio = "<!-- PROJECTS:START -->"
+      fim = "<!-- PROJECTS:END -->"
+
+      if inicio not in readme or fim not in readme:
+          raise Exception(
+              "Os marcadores PROJECTS:START e PROJECTS:END não foram encontrados."
+          )
+
+      antes = readme.split(inicio)[0]
+      depois = readme.split(fim, 1)[1]
+
+      readme_novo = (
+          antes
+          + inicio
+          + "\n\n"
+          + novo_conteudo
+          + "\n\n"
+          + fim
+          + depois
+      )
+
+      with open(README, "w", encoding="utf-8") as arquivo:
+          arquivo.write(readme_novo)
+
+      print("README atualizado com sucesso!")
+      PY
+
+  - name: Salvar atualização
+    run: |
+      git config user.name "github-actions[bot]"
+      git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      git add README.md
+
+      if git diff --cached --quiet; then
+        echo "Nenhuma alteração encontrada."
+      else
+        git commit -m "chore: atualizar projetos do perfil"
+        git push
+      fi
+```
 
