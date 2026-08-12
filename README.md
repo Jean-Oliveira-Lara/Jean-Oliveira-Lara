@@ -134,22 +134,20 @@ Cada projeto é uma oportunidade de aprender algo novo e melhorar minhas habilid
 
 ---
 
-## 📫 Contato
+## 📫 Entre em contato
 
 <p align="center">
+
+<a href="mailto:jeanoliveiradelara@gmail.com">
+  <img src="https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white"/>
+</a>
+
+<a href="https://www.linkedin.com/in/jean-oliveira-de-lara-361b0020b/">
+  <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/>
+</a>
 
 <a href="https://github.com/Jean-Oliveira-Lara">
   <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/>
 </a>
 
-</p>
-
----
-
-<p align="center">
-  <strong>⭐ Obrigado por visitar meu perfil!</strong>
-</p>
-
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:06B6D4,50:2563EB,100:0F172A&height=120&section=footer"/>
 </p>
