@@ -62,9 +62,9 @@ jobs:
 
                 let projects = filtered.map(repo => `### [${repo.name}](https://github.com/${username}/${repo.name})
 
-${repo.description || "Projeto sem descrição."}
+${repo.description || 'Projeto sem descrição.'}
 
-**Tecnologia:** ${repo.language || "Não especificada"}  
+**Tecnologia:** ${repo.language || 'Não especificada'}  
 **⭐ Stars:** ${repo.stargazers_count}
 
 [Ver projeto](https://github.com/${username}/${repo.name})
