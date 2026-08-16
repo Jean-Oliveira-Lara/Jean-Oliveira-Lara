@@ -25,28 +25,42 @@ jobs:
           persist-credentials: true
           fetch-depth: 0
 
-      - name: Atualizar projetos
+      - name: List workspace (debug)
+        run: |
+          echo "== Workspace files =="
+          ls -la
+          echo "\n== README head (first 200 lines) =="
+          if [ -f README.md ]; then sed -n '1,200p' README.md; else echo "README.md not found"; fi
+
+      - name: Atualizar projetos (debug + seguro)
         uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
 
-            try {
-              const username = "Jean-Oliveira-Lara";
+            (async () => {
+              try {
+                const username = process.env.GITHUB_REPOSITORY
+                  ? process.env.GITHUB_REPOSITORY.split('/')[0]
+                  : "Jean-Oliveira-Lara";
+                console.log("username:", username);
 
-              // Busca todos os repositórios do usuário (paginação automática)
-              const repos = await github.paginate(github.rest.repos.listForUser, {
-                username,
-                type: 'owner',
-                sort: 'updated',
-                direction: 'desc',
-                per_page: 100
-              });
+                const repos = await github.paginate(github.rest.repos.listForUser, {
+                  username,
+                  type: 'owner',
+                  sort: 'updated',
+                  direction: 'desc',
+                  per_page: 100
+                });
 
-              const filtered = repos
-                .filter(repo => !repo.fork && !repo.archived && !repo.private && repo.name !== username);
+                console.log("total repos fetched:", repos.length);
 
-              let projects = filtered.map(repo => `### [${repo.name}](https://github.com/${username}/${repo.name})
+                const filtered = repos
+                  .filter(r => !r.fork && !r.archived && !r.private && r.name !== username);
+
+                console.log("repos after filter:", filtered.length);
+
+                let projects = filtered.map(repo => `### [${repo.name}](https://github.com/${username}/${repo.name})
 
 ${repo.description || "Projeto sem descrição."}
 
@@ -57,44 +71,47 @@ ${repo.description || "Projeto sem descrição."}
 
 `).join('\n');
 
-              if (!projects) {
-                projects = "Nenhum projeto público encontrado.";
+                if (!projects) {
+                  projects = "Nenhum projeto público encontrado.";
+                }
+
+                const readmePath = "README.md";
+
+                if (!fs.existsSync(readmePath)) {
+                  console.error("README.md não encontrado no workspace. Arquivos no workspace:");
+                  console.log(fs.readdirSync('.'));
+                  return;
+                }
+
+                let readme = fs.readFileSync(readmePath, "utf8");
+
+                const startMarker = "<!-- PROJECTS:START -->";
+                const endMarker = "<!-- PROJECTS:END -->";
+
+                if (!readme.includes(startMarker) || !readme.includes(endMarker)) {
+                  console.error("Marcadores dos projetos não encontrados no README.");
+                  console.log("Trecho inicial do README (até 2000 chars):");
+                  console.log(readme.slice(0, 2000));
+                  return;
+                }
+
+                // Substituição segura entre marcadores (preserva os marcadores)
+                const regex = new RegExp(`${startMarker}[\\s\\S]*?${endMarker}`, 'm');
+                const replacement = `${startMarker}\n\n${projects}\n${endMarker}`;
+                const updatedReadme = readme.replace(regex, replacement);
+
+                if (updatedReadme === readme) {
+                  console.log("README já está atualizado. Nada a fazer.");
+                  return;
+                }
+
+                fs.writeFileSync(readmePath, updatedReadme);
+                console.log("README atualizado com sucesso.");
+              } catch (error) {
+                console.error(error);
+                throw error;
               }
-
-              const readmePath = "README.md";
-
-              if (!fs.existsSync(readmePath)) {
-                throw new Error("README.md não encontrado.");
-              }
-
-              let readme = fs.readFileSync(readmePath, "utf8");
-
-              const startMarker = "<!-- PROJECTS:START -->";
-              const endMarker = "<!-- PROJECTS:END -->";
-
-              const start = readme.indexOf(startMarker);
-              const end = readme.indexOf(endMarker, start + startMarker.length);
-
-              if (start === -1 || end === -1) {
-                throw new Error("Marcadores dos projetos não encontrados no README.");
-              }
-
-              const before = readme.substring(0, start + startMarker.length);
-              const after = readme.substring(end); // mantém o endMarker em after
-
-              const updatedReadme = before + "\n\n" + projects + "\n" + after;
-
-              if (updatedReadme === readme) {
-                console.log("README já está atualizado. Nada a fazer.");
-                return;
-              }
-
-              fs.writeFileSync(readmePath, updatedReadme);
-              console.log("README atualizado com sucesso.");
-            } catch (error) {
-              console.error(error);
-              throw error;
-            }
+            })();
 
       - name: Commit README
         run: |
