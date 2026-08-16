@@ -4,8 +4,10 @@ on:
   push:
     branches:
       - main
+
   schedule:
     - cron: "0 12 * * *"
+
   workflow_dispatch:
 
 permissions:
@@ -16,10 +18,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Baixar repositório
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Atualizar lista de projetos
+      - name: Atualizar projetos
         uses: actions/github-script@v7
         with:
           script: |
@@ -36,29 +38,28 @@ jobs:
             });
 
             const repos = response.data
-              .filter(repo => !repo.fork && !repo.archived)
-              .filter(repo => repo.name.toLowerCase() !== username.toLowerCase())
-              .filter(repo => !repo.private);
+              .filter(repo => !repo.fork)
+              .filter(repo => !repo.archived)
+              .filter(repo => !repo.private)
+              .filter(repo => repo.name !== username);
 
             let projects = "";
 
-            if (repos.length === 0) {
-              projects = "Nenhum projeto público encontrado.";
-            } else {
-              projects = repos.map(repo => {
-                const description =
-                  repo.description || "Projeto sem descrição.";
+            for (const repo of repos) {
+              projects += `### [${repo.name}](https://github.com/${username}/${repo.name})
 
-                return `### [${repo.name}](https://github.com/${username}/${repo.name})
+${repo.description || "Projeto sem descrição."}
 
-${description}
+**Tecnologia:** ${repo.language || "Não especificada"}  
+**⭐ Stars:** ${repo.stargazers_count}
 
-**Tecnologias:** ${repo.language || "Não especificada"}  
-**⭐ Stars:** ${repo.stargazers_count}  
-**🔗 [Ver projeto](https://github.com/${username}/${repo.name})}
+[Ver projeto](https://github.com/${username}/${repo.name})
 
 `;
-              }).join("\n");
+            }
+
+            if (!projects) {
+              projects = "Nenhum projeto público encontrado.";
             }
 
             const readmePath = "README.md";
@@ -73,33 +74,31 @@ ${description}
             const startMarker = "<!-- PROJECTS:START -->";
             const endMarker = "<!-- PROJECTS:END -->";
 
-            const startIndex = readme.indexOf(startMarker);
-            const endIndex = readme.indexOf(endMarker);
+            const start = readme.indexOf(startMarker);
+            const end = readme.indexOf(endMarker);
 
-            if (startIndex === -1 || endIndex === -1) {
-              core.setFailed(
-                "Os marcadores PROJECTS:START e PROJECTS:END não foram encontrados no README."
-              );
+            if (start === -1 || end === -1) {
+              core.setFailed("Marcadores dos projetos não encontrados no README.");
               return;
             }
 
             const before = readme.substring(
               0,
-              startIndex + startMarker.length
+              start + startMarker.length
             );
 
-            const after = readme.substring(endIndex);
+            const after = readme.substring(end);
 
-            const newReadme =
+            const updatedReadme =
               before +
               "\n\n" +
               projects +
               "\n" +
               after;
 
-            fs.writeFileSync(readmePath, newReadme);
+            fs.writeFileSync(readmePath, updatedReadme);
 
-      - name: Salvar alterações
+      - name: Commit README
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -107,8 +106,8 @@ ${description}
           git add README.md
 
           if git diff --cached --quiet; then
-            echo "Nenhuma alteração no README."
+            echo "Nenhuma alteração necessária."
           else
-            git commit -m "Atualiza lista de projetos"
+            git commit -m "Atualiza projetos no README"
             git push
           fi
