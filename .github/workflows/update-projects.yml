@@ -96,9 +96,18 @@ ${repo.description || 'Projeto sem descrição.'}
                 }
 
                 // Substituição segura entre marcadores (preserva os marcadores)
-                const regex = new RegExp(`${startMarker}[\\s\\S]*?${endMarker}`, 'm');
-                const replacement = `${startMarker}\n\n${projects}\n${endMarker}`;
-                const updatedReadme = readme.replace(regex, replacement);
+                function escapeForRegex(s) {
+                  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                }
+
+                const escapedStart = escapeForRegex(startMarker);
+                const escapedEnd = escapeForRegex(endMarker);
+                const regex = new RegExp(`${escapedStart}[\\s\\S]*?${escapedEnd}`, 'm');
+
+                const replacementContent = `${startMarker}\n\n${projects}\n${endMarker}`;
+
+                // Use função de replacement para evitar interpretação de $ na string
+                const updatedReadme = readme.replace(regex, () => replacementContent);
 
                 if (updatedReadme === readme) {
                   console.log("README já está atualizado. Nada a fazer.");
@@ -123,6 +132,6 @@ ${repo.description || 'Projeto sem descrição.'}
           if git diff --cached --quiet; then
             echo "Nenhuma alteração necessária."
           else
-            git commit -m "Atualiza projetos no README"
+            git commit -m "Melhora substituição segura no README (escape de marcadores e replacement seguro)"
             git push
           fi
