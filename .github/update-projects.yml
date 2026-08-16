@@ -1,0 +1,114 @@
+name: Atualizar Projetos no README
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "0 12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar repositório
+        uses: actions/checkout@v4
+
+      - name: Atualizar lista de projetos
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require("fs");
+
+            const username = "Jean-Oliveira-Lara";
+
+            const response = await github.rest.repos.listForUser({
+              username: username,
+              type: "owner",
+              sort: "updated",
+              direction: "desc",
+              per_page: 100
+            });
+
+            const repos = response.data
+              .filter(repo => !repo.fork && !repo.archived)
+              .filter(repo => repo.name.toLowerCase() !== username.toLowerCase())
+              .filter(repo => !repo.private);
+
+            let projects = "";
+
+            if (repos.length === 0) {
+              projects = "Nenhum projeto público encontrado.";
+            } else {
+              projects = repos.map(repo => {
+                const description =
+                  repo.description || "Projeto sem descrição.";
+
+                return `### [${repo.name}](https://github.com/${username}/${repo.name})
+
+${description}
+
+**Tecnologias:** ${repo.language || "Não especificada"}  
+**⭐ Stars:** ${repo.stargazers_count}  
+**🔗 [Ver projeto](https://github.com/${username}/${repo.name})}
+
+`;
+              }).join("\n");
+            }
+
+            const readmePath = "README.md";
+
+            if (!fs.existsSync(readmePath)) {
+              core.setFailed("README.md não encontrado.");
+              return;
+            }
+
+            let readme = fs.readFileSync(readmePath, "utf8");
+
+            const startMarker = "<!-- PROJECTS:START -->";
+            const endMarker = "<!-- PROJECTS:END -->";
+
+            const startIndex = readme.indexOf(startMarker);
+            const endIndex = readme.indexOf(endMarker);
+
+            if (startIndex === -1 || endIndex === -1) {
+              core.setFailed(
+                "Os marcadores PROJECTS:START e PROJECTS:END não foram encontrados no README."
+              );
+              return;
+            }
+
+            const before = readme.substring(
+              0,
+              startIndex + startMarker.length
+            );
+
+            const after = readme.substring(endIndex);
+
+            const newReadme =
+              before +
+              "\n\n" +
+              projects +
+              "\n" +
+              after;
+
+            fs.writeFileSync(readmePath, newReadme);
+
+      - name: Salvar alterações
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add README.md
+
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteração no README."
+          else
+            git commit -m "Atualiza lista de projetos"
+            git push
+          fi
