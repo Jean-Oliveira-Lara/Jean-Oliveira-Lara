@@ -35,7 +35,7 @@ Estou construindo minha experiência através de projetos práticos, explorando 
 ### 💻 Linguagens
 
 <p align="left">
-  <img src="https://skillicons.dev/icons?i=js,html" />
+  <img src="https://skillicons.dev/icons?i=js,html,cpp,css" />
 </p>
 
 ---
